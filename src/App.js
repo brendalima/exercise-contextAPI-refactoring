@@ -2,7 +2,7 @@ import './App.css';
 import Cars from './Cars';
 import React, { createContext } from 'react';
 
-const MyContext = createContext();
+export const MyContext = createContext();
 
 class App extends React.Component {
   constructor(props) {
@@ -17,13 +17,13 @@ class App extends React.Component {
     };
   }
 
-  moveCar() {
-    this.setState((car, side) => ({cars:{[car]: side}}));
+  moveCar(car, side) {
+    this.setState({cars:{[car]: side}});
   }
   render() {
     const contextValue = {
       cars: this.state.cars,
-      moveCar: this.moveCar(),
+      moveCar: (car, side) => this.moveCar(car, side),
     }
     return (
       <MyContext.Provider value={contextValue}>
